@@ -23,19 +23,6 @@ function getWord(){
   return words[Math.floor(Math.random()*words.length)];
 };
 
-function checkNoun(word){
-  pos(word, function (data) {
-  	console.log(word)
-  	console.log(data[0][0].pos.indexOf('Noun')>=0 );
-  });
-};
-
-function checkVerb(word){
-  pos(word, function (data) {
-  	return data[0][0].pos.indexOf('Verb')>=0;
-  });
-};
-
 //finds a Noun and calls the callback function on it
 function generateValidNoun(callback){
   pos(getWord(), function (data) {
