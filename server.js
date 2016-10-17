@@ -8,27 +8,27 @@ var string = "I love to sing in the dark";
 
 var finalSentence = "The ";
 
-addNoun()
+addNoun(finalSentence)
 
-function addNoun(){
+function addNoun(sentence){
+	var isNounNotFound = true;
+	while(isNounNotFound){
+		pos(getWord(), function (data) {
+	    addVerb(sentence + data[0][0].word+" ");
+		});
+		isNounNotFound = false;
+	}
+};
+
+function addVerb(sentence){
   pos(getWord(), function (data) {
-	  console.log(JSON.stringify(data,null,2));
-	})
-}
+  	sentence += data[0][0].word+".";
+  	    console.log(sentence)
+  });
+};
 
 function getWord(){
   //get a random word
   return words[Math.floor(Math.random()*words.length)];
-}
+};
 
-
-
-//Sentence complete
-finalSentence += ".";
-
-
-
-//this will detect whether the sting fits the sentence structure
-pos(string, function (data) {
-  //console.log(JSON.stringify(data,null,2));
-})
