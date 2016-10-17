@@ -9,8 +9,8 @@ var string = "I love to sing in the dark";
 var finalSentence = "The ";
 
 //addNoun(finalSentence)
-checkNoun(getWord())
-//generateValidNoun()
+//checkNoun(getWord())
+generateValidAdjective(console.log)
 
 
 
@@ -25,8 +25,8 @@ function getWord(){
 
 function checkNoun(word){
   pos(word, function (data) {
-  	console.log( word)
-  	console.log( data[0][0].pos.indexOf('Noun')>=0 );
+  	console.log(word)
+  	console.log(data[0][0].pos.indexOf('Noun')>=0 );
   });
 };
 
@@ -36,20 +36,36 @@ function checkVerb(word){
   });
 };
 
-function generateValidNoun(){
-	var randWord = getWord();
-	if(checkNoun(randWord)){
-		return randWord;
-	}else{
-		generateValidNoun();
-	};
+//finds a Noun and calls the callback function on it
+function generateValidNoun(callback){
+  pos(getWord(), function (data) {
+  	if(data[0][0].pos.indexOf('Noun')>=0){
+  		callback(data[0][0].word);
+  	}else{
+  	  console.log('oops')
+  	  generateValidNoun(callback)
+  	}
+  });
 };
 
-function generateValidVerb(){
-	var randWord = getWord();
-	if(checkVerb(randWord)){
-		return randWord;
-	}else{
-		generateValidNoun();
-	};
+function generateValidVerb(callback){
+  pos(getWord(), function (data) {
+  	if(data[0][0].pos.indexOf('Verb')>=0){
+  		callback(data[0][0].word);
+  	}else{
+  	  console.log('oops')
+  	  generateValidNoun(callback)
+  	}
+  });
+};
+
+function generateValidAdjective(callback){
+  pos(getWord(), function (data) {
+  	if(data[0][0].pos.indexOf('Adjective')>=0){
+  		callback(data[0][0].word);
+  	}else{
+  	  console.log('oops')
+  	  generateValidNoun(callback)
+  	}
+  });
 };
