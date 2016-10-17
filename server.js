@@ -8,27 +8,48 @@ var string = "I love to sing in the dark";
 
 var finalSentence = "The ";
 
-addNoun(finalSentence)
+//addNoun(finalSentence)
+checkNoun(getWord())
+//generateValidNoun()
 
-function addNoun(sentence){
-	var isNounNotFound = true;
-	while(isNounNotFound){
-		pos(getWord(), function (data) {
-	    addVerb(sentence + data[0][0].word+" ");
-		});
-		isNounNotFound = false;
-	}
-};
 
-function addVerb(sentence){
-  pos(getWord(), function (data) {
-  	sentence += data[0][0].word+".";
-  	    console.log(sentence)
-  });
-};
 
+function generateTheNounVerbPhrase(){
+
+}
+
+//get a random word
 function getWord(){
-  //get a random word
   return words[Math.floor(Math.random()*words.length)];
 };
 
+function checkNoun(word){
+  pos(word, function (data) {
+  	console.log( word)
+  	console.log( data[0][0].pos.indexOf('Noun')>=0 );
+  });
+};
+
+function checkVerb(word){
+  pos(word, function (data) {
+  	return data[0][0].pos.indexOf('Verb')>=0;
+  });
+};
+
+function generateValidNoun(){
+	var randWord = getWord();
+	if(checkNoun(randWord)){
+		return randWord;
+	}else{
+		generateValidNoun();
+	};
+};
+
+function generateValidVerb(){
+	var randWord = getWord();
+	if(checkVerb(randWord)){
+		return randWord;
+	}else{
+		generateValidNoun();
+	};
+};
