@@ -1,0 +1,17 @@
+{
+  "name": "twitbot",
+  "version": "0.0.1",
+  "description": "My first shot at twitter AI.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dominic Balassone",
+  "license": "ISC",
+  "dependencies": {
+    "an-array-of-english-words": "^1.1.0",
+    "node-pos": "0.0.4",
+    "request": "^2.75.0",
+    "twit": "^2.2.5"
+  }
+}
